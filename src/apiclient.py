@@ -1,5 +1,6 @@
+from settings import API_URL
 import requests
-HOST = 'http://127.0.0.1:5000'
+HOST = API_URL
 
 
 def tglogin_api(id):

@@ -8,7 +8,7 @@ from telepot.aio.delegate import (
     per_chat_id, per_callback_query_origin, create_open, pave_event_space, include_callback_query_chat_id)
 from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from client import ApiClient
-
+from settings import API_URL, TELEGRAM_TOKEN
 
 class ApiClientStarter(telepot.aio.helper.ChatHandler):
     def __init__(self, *args, **kwargs):
@@ -34,7 +34,8 @@ class ApiClientStarter(telepot.aio.helper.ChatHandler):
         # self.close()
 
 
-TOKEN = '446009865:AAFjtRR60rxhGAyJcq2EPbHAIWhBMjpvCIM'
+TOKEN = TELEGRAM_TOKEN
+print(TOKEN)
 
 # telepot.api.set_proxy('https://45.32.195.95:8118', )
 
