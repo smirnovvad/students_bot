@@ -1,14 +1,17 @@
 # coding=utf-8
-import sys
 import asyncio
 import telepot
 from telepot import glance
 from telepot.aio.loop import MessageLoop
 from telepot.aio.delegate import (
-    per_chat_id, per_callback_query_origin, create_open, pave_event_space, include_callback_query_chat_id)
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
+    per_chat_id,
+    create_open,
+    pave_event_space,
+    include_callback_query_chat_id)
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from client import ApiClient
-from settings import API_URL, TELEGRAM_TOKEN
+from settings import TELEGRAM_TOKEN
+
 
 class ApiClientStarter(telepot.aio.helper.ChatHandler):
     def __init__(self, *args, **kwargs):
@@ -18,11 +21,6 @@ class ApiClientStarter(telepot.aio.helper.ChatHandler):
         content_type, chat_type, chat_id = glance(msg)
         print(msg, content_type, chat_type, chat_id)
 
-        # delay = float(msg['text'])
-
-        # 3. Schedule event
-        #      The second argument is the event spec: a 2-tuple of (flavor, dict).
-        # Put any custom data in the dict. Retrieve them in the event-handling function.
 
         if content_type == 'text':
 

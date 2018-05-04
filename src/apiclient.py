@@ -1,5 +1,5 @@
-from settings import API_URL
 import requests
+from settings import API_URL
 HOST = API_URL
 
 
