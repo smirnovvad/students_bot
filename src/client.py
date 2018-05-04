@@ -1,8 +1,8 @@
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
-from apiclient import tglogin_api, get_groups, get_detail, update
+import asyncio
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from telepot import glance, origin_identifier
 import telepot
-import asyncio
+from apiclient import tglogin_api, get_groups, get_detail, update
 
 
 class ApiClient(telepot.aio.helper.ChatHandler):
