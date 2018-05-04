@@ -32,20 +32,20 @@ class ApiClientStarter(telepot.aio.helper.ChatHandler):
         # self.close()
 
 
-TOKEN = TELEGRAM_TOKEN
-print(TOKEN)
-
-# telepot.api.set_proxy('https://45.32.195.95:8118', )
+if __name__ == "__main__":
 
 
-bot = telepot.aio.DelegatorBot(TOKEN, [
-    include_callback_query_chat_id(
-        pave_event_space())(
-        per_chat_id(), create_open, ApiClient, timeout=10000),
-])
+    TOKEN = TELEGRAM_TOKEN
+    print(TOKEN)
 
-loop = asyncio.get_event_loop()
-loop.create_task(MessageLoop(bot).run_forever())
-print('Listening ...')
+    bot = telepot.aio.DelegatorBot(TOKEN, [
+        include_callback_query_chat_id(
+            pave_event_space())(
+                per_chat_id(), create_open, ApiClient, timeout=10000),
+    ])
 
-loop.run_forever()
+    loop = asyncio.get_event_loop()
+    loop.create_task(MessageLoop(bot).run_forever())
+    print('Listening ...')
+
+    loop.run_forever()
