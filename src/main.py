@@ -29,8 +29,6 @@ class ApiClientStarter(telepot.aio.helper.ChatHandler):
             ])
             await self.sender.sendMessage('Авторизуйтесь', reply_markup=keyboard)
 
-        # self.close()
-
 
 if __name__ == "__main__":
 
