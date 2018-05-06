@@ -111,7 +111,7 @@ class ApiClient(telepot.aio.helper.ChatHandler):
             else:
                 self._students = result['students']
 
-            keyboard = InlineKeyboardMarkup(inline_keyboard=list(map(lambda c: [InlineKeyboardButton(text=str(f'{c["last_name"]} {c["first_name"][0]}. {c["middle_name"][0]}.'), callback_data='student_detail_' + str(c['id']))], list(self._students))) + [[InlineKeyboardButton(text='← Назад', callback_data=self._query_before)]])
+            keyboard = InlineKeyboardMarkup(inline_keyboard=list(map(lambda c: [InlineKeyboardButton(text=str(f'{c["last_name"]} {c["first_name"][0]}. {c["middle_name"][0]}.'), callback_data='student_detail_' + str(c['id']))], list(self._students))) + [[InlineKeyboardButton(text='← Назад', callback_data='get_groups')]])
             await self.editor.editMessageText(f'Список студентов в группе:', reply_markup=keyboard)
             # self._query_before = query_data
 
@@ -120,10 +120,16 @@ class ApiClient(telepot.aio.helper.ChatHandler):
             student = next((item for item in self._students if item["id"] == int(query_data[15:])))
         # self._students = get_detail(self._access_token, link["students"])['students']
             result = f'*Ф.И.О.* - {student["last_name"]} {student["first_name"]} {student["middle_name"]}\n*Обучение* - {student["traing"]}\n*Email* - {student["email"]}\n*Номер телефона* - {student["phone"]}\n[Telegram](tg://user?id={student["telegram_id"]})'
-            keyboard = InlineKeyboardMarkup(inline_keyboard=[
-                [InlineKeyboardButton(text='Отправить контакт', callback_data=f'get_contact_{student["id"]}'), ],
-                [InlineKeyboardButton(text='← Назад', callback_data='get_groups')],
-            ])
+            if student['phone'] is not None:
+                keyboard = InlineKeyboardMarkup(inline_keyboard=[
+                        [InlineKeyboardButton(text='Отправить контакт', callback_data=f'get_contact_{student["id"]}'), ],
+                    [InlineKeyboardButton(text='← Назад', callback_data='get_groups')],
+                ])
+            else:
+                keyboard = InlineKeyboardMarkup(inline_keyboard=[
+                    [InlineKeyboardButton(text='← Назад', callback_data='get_groups')],
+                ])
+
             await self.editor.editMessageText(f'{result}', reply_markup=keyboard, parse_mode='Markdown')
 
         # STUDENT DETAIL
